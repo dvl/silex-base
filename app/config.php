@@ -1,15 +1,13 @@
 <?php
 
-$app['debug'] = true;
-
 $dbs = array (
     'apoteste' => array(
-        'driver'    => 'oci8',
-        'dbname'    => 'ORA',
-        'host'      => NULL,
-        'port'      => NULL,
-        'user'      => 'ORA',
-        'password'  => 'ora123',
+        'driver'    => 'pdo_mysql',
+        'dbname'    => 'silex',
+        'host'      => 'localhost',
+        // 'port'      => NULL,
+        'user'      => 'root',
+        'password'  => 'deadpool',
         'charset'   => 'utf8',
     ),
 );

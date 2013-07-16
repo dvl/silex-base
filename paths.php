@@ -6,4 +6,5 @@
 
 $environments = array(
 	'dirija-PcCs' => 'local',
+	'CANAAN' => 'local',
 );

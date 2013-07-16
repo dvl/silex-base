@@ -1,0 +1,36 @@
+{% extends "layout/base.twig" %}
+
+{% block title "Login" %}
+
+{% block content %}
+	{{ form_start(form, {'action': path('login'), 'attr': {'class': 'form-horizontal'}}) }}
+		<fieldset>
+			<div id="legend">
+				<legend>Login</legend>
+			</div>
+				
+			<div class="control-group">
+				<!-- Username -->
+				{{ form_label(form.nomelogin, 'Usuário', {'label_attr': {'class': 'control-label'}}) }}
+				<div class="controls">
+					{{ form_widget(form.nomelogin, {'attr': {'class': 'input-xlarge'}}) }}
+				</div>
+			</div>
+
+			<div class="control-group">
+				<!-- Password-->
+				{{ form_label(form.senha, 'Senha', {'label_attr': {'class': 'control-label'}}) }}
+				<div class="controls">
+					{{ form_widget(form.senha, {'attr': {'class': 'input-xlarge'}}) }}
+				</div>
+			</div>
+
+			<div class="control-group">
+				<!-- Button -->
+				<div class="controls">
+					{{ form_widget(form.logar, {'attr': {'class': 'btn btn-success'}}) }}
+				</div>
+			</div>
+		</fieldset>
+	{{ form_end(form) }}
+{% endblock %}

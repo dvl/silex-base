@@ -34,3 +34,43 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
 		'cache' => __DIR__ . '/../storage/twig'
 	),
 ));
+
+// Sessions
+
+$app->register(new Silex\Provider\SessionServiceProvider());
+
+// Url Generator
+
+$app->register(new Silex\Provider\UrlGeneratorServiceProvider());
+
+// Validator
+
+$app->register(new Silex\Provider\ValidatorServiceProvider());
+
+// Forms
+
+$app->register(new Silex\Provider\FormServiceProvider());
+
+// Translations (Needed for forms)
+
+$app->register(new Silex\Provider\TranslationServiceProvider(), array(
+	'locale_fallback' => 'en',
+));
+
+// Auth
+
+$app->register(new Silex\Provider\SecurityServiceProvider(), array(
+	'security.firewalls' => array(
+		'login' => array(
+			'pattern' => '^/login$',
+			'anonymous' => true
+		),
+		'site' => array(
+			'pattern' => '^/.*$',
+			'anonymous' => false,
+		),
+	),
+));
+
+# http://www.bubblecode.net/en/2012/08/28/mysql-authentication-in-silex-the-php-micro-framework/
+# https://github.com/manelpm10/Silex-MVC-Example-with-Auth/blob/master/src/app.php
