@@ -5,6 +5,8 @@ namespace Controllers;
 use Silex\Application;
 use Silex\ControllerProviderInterface;
 
+use Symfony\Component\HttpFoundation\Request;
+
 class IndexController implements ControllerProviderInterface
 {
 	public function connect(Application $app) 
@@ -33,8 +35,18 @@ class IndexController implements ControllerProviderInterface
 		return $app['twig']->render('home/login.twig', array('form' => $form->createView()));
 	}
 
-	public function dologin(Application $app)
+	public function dologin(Application $app, Request $request)
 	{
-		
+		$form = $app['form.factory']->create(new \Forms\LoginForm());
+
+		$form->handleRequest($request);
+
+		$formdata = $request->get('login');
+
+		if ($form->isValid())
+			return print_r($formdata);
+
+		else
+			return 'erro';
 	}
 }
