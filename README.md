@@ -1,4 +1,13 @@
-silex-base
-==========
+Silex MVC base application
+==========================
 
-Silex base application for personal purposes
+This application is intended to be used as base for MVC applications based on Silex
+
+Contents
+--------
++ Composer
++ Silex
++ User Auth
++ Doctrine
++ Twig
++ Twitter Bootstrap
