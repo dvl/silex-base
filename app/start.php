@@ -79,15 +79,11 @@ $app->register(new Silex\Provider\SecurityServiceProvider(), array(
 			'anonymous' => false,
 			'logout' => array('logout_path' => '/logout'),
 			'users' => $app->share(function() use ($app) {
-				return new \Providers\UserProvider($app['db']);
+				return new \Providers\UserProvider($app['dbs']['apoteste']);
 			}),
 		),
 	),
 ));
-
-$app['security.encoder.digest'] = $app->share(function ($app) {
-    return new \Classes\MessageDigestPasswordEncoder('md5', false, 0);
-});
 
 # http://www.bubblecode.net/en/2012/08/28/mysql-authentication-in-silex-the-php-micro-framework/
 # https://github.com/manelpm10/Silex-MVC-Example-with-Auth/blob/master/src/app.php

@@ -24,7 +24,7 @@ class UserProvider implements UserProviderInterface
         if (!$user = $stmt->fetch()) {
             throw new UsernameNotFoundException(sprintf('Username "%s" does not exist.', $username));
         }
- 
+
         return new User($user['nomelogin'], $user['senha'], explode(',', 'ROLE_USER'), true, true, true, true);
     }
  
