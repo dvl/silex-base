@@ -3,11 +3,19 @@
 {% block title "Login" %}
 
 {% block content %}
-	{{ form_start(form, {'action': path('login'), 'attr': {'class': 'form-horizontal'}}) }}
+	{{ form_start(form, {'action': path('login_check'), 'attr': {'class': 'form-horizontal'}}) }}
 		<fieldset>
 			<div id="legend">
 				<legend>Login</legend>
 			</div>
+
+			{% if error %}
+				<div class="controle-group">
+					<div class="alert alert-error">
+						<strong>Erro!</strong> {{ error }}
+					</div>
+				</div>
+	        {% endif %}
 				
 			<div class="control-group">
 				<!-- Username -->

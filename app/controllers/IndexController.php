@@ -15,24 +15,29 @@ class IndexController implements ControllerProviderInterface
 
 		$controller->get('/', array($this, 'index'));
 		$controller->get('/login', array($this, 'login'));
-		$controller->post('/login', array($this, 'dologin'))->bind('login');
+		// $controller->post('/login', array($this, 'dologin'))->bind('login');
 
 		return $controller;
 	}
 
 	public function index(Application $app)
 	{
-		if (!$auth)
+		$token = $app['security']->getToken();
+
+		if ($token === null)
 			return $app->redirect('/login');
 
 		return $app['twig']->render('home/index.twig', array());
 	}
 
-	public function login(Application $app)
+	public function login(Application $app, Request $request)
 	{
 		$form = $app['form.factory']->create(new \Forms\LoginForm());
 
-		return $app['twig']->render('home/login.twig', array('form' => $form->createView()));
+		return $app['twig']->render('home/login.twig', array(
+			'form' => $form->createView(),
+			'error' => $app['security.last_error']($request)
+		));
 	}
 
 	public function dologin(Application $app, Request $request)

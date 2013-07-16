@@ -37,7 +37,9 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
 
 // Sessions
 
-$app->register(new Silex\Provider\SessionServiceProvider());
+$app->register(new Silex\Provider\SessionServiceProvider(), array(
+	'session.storage.save_path' => __DIR__ . '/../storage/sessions',
+));
 
 // Url Generator
 
@@ -61,16 +63,41 @@ $app->register(new Silex\Provider\TranslationServiceProvider(), array(
 
 $app->register(new Silex\Provider\SecurityServiceProvider(), array(
 	'security.firewalls' => array(
+		// Rotas que não precisa estar logado
 		'login' => array(
 			'pattern' => '^/login$',
 			'anonymous' => true
 		),
+		// Rotas que necessitam de autenticação
 		'site' => array(
 			'pattern' => '^/.*$',
+			'form'	=> array(
+				'login_path' => '/login',
+				'username_parameter' => 'form[nomelogin]',
+				'password_parameter' => 'form[senha]',
+			),
 			'anonymous' => false,
+			'logout' => array('logout_path' => '/logout'),
+			'users' => $app->share(function() use ($app) {
+				return new \Providers\UserProvider($app['db']);
+			}),
 		),
 	),
 ));
 
+$app['security.encoder.digest'] = $app->share(function ($app) {
+    return new \Classes\MessageDigestPasswordEncoder('md5', false, 0);
+});
+
 # http://www.bubblecode.net/en/2012/08/28/mysql-authentication-in-silex-the-php-micro-framework/
 # https://github.com/manelpm10/Silex-MVC-Example-with-Auth/blob/master/src/app.php
+# http://stackoverflow.com/questions/14704266/user-authentication-with-a-db-backed-userprovider-in-silex
+
+// Assetic
+
+$app->register(new SilexAssetic\AsseticServiceProvider(), array(
+	'assetic.path_to_web' => __DIR__ . '/../public/assets/',
+	'assetic.options' => array(
+		'debug' => true
+	),
+));
