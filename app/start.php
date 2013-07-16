@@ -97,3 +97,6 @@ $app->register(new SilexAssetic\AsseticServiceProvider(), array(
 		'debug' => true
 	),
 ));
+
+
+$app->boot();

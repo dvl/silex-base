@@ -37,7 +37,8 @@
         "swiftmailer/swiftmailer": "5.*",
         "symfony/class-loader": "~2.1",
         "mheap/Silex-Assetic": "dev-master@dev",
-        "leafo/lessphp": "0.3.*@dev"
+        "leafo/lessphp": "0.3.*@dev",
+        "silex/web-profiler": "1.0.*@dev"
     },
 
     "autoload": {
