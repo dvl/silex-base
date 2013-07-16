@@ -1,7 +1,7 @@
 Silex MVC base application
 ==========================
 
-This application is intended to be used as base for MVC applications based on Silex
+This application is intended to be used as base for MVC applications with Silex, It was made for personal purposes but I don't see any reasons to don't share with everyone.
 
 Contents
 --------
